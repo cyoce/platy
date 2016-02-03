@@ -1,2 +1,2 @@
 # platy
-Interpreted stack-based golfing langauge
+Interpreted stack-based golfing language
