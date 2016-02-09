@@ -1,0 +1,14 @@
+{ shift left
+} shift right
+[ start array
+] end array
+" string
+' char
+` regex / special string
+< -1
+> +1
++ +
+- -
+* *
+/ /
+% mod

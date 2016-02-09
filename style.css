@@ -1,0 +1,45 @@
+.mono {
+	font-family: monaco, menlo, courier, monospace;
+}
+
+.box, .btn {
+	background-color:#eee;
+	border: 1.5px solid #ccc;
+	padding:4px;
+	font-size: 16px;
+}
+.box:focus, .btn:active {
+	border-color:#0af;
+}
+*:focus, *:active {
+	outline:none;
+}
+#output {
+	height: 100px;
+	overflow-y: scroll;
+}
+
+
+.full {
+	width: 100%;
+}
+.cont {
+	width: 60%;
+	min-height:1em;
+}
+
+td {
+	border:1px solid #ccc;
+	margin:0;
+	text-align:center;
+}
+td.special {
+	border-color:#0af;
+}
+
+tr, table {
+	width:10%;
+}
+.vert {
+	height:90%;
+}

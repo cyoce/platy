@@ -1,0 +1,42 @@
+<!-- Online Interpreter -->
+<head>
+	<link rel="stylesheet" href="style.css">
+	<script type='text/javascript' src='jquery-2.2.0.min.js'></script>
+	<script type='text/javascript' src='interp.js'></script>
+	<script type='text/javascript' src='platy.js'></script>
+</head>
+<body>
+	<h1 class="mono editor">
+		Platy: A stack-based golfing language
+		<br>
+	</h1>
+	<div class='cont editor'>
+		<h2 class="mono"> Input </h2>
+		<input type="text" placeholder="input" id="input" class="mono box"/>
+		<br>
+		<h2 class='mono'>
+			Program
+			<button id="btn-run" class="mono btn"> Run </button><span id='bytes'></span>
+			<button id="permalink" class="mono btn">Permalink</button>
+			<button id="markdown" class="mono btn">Markdown</button>
+		</h2>
+		<span class='mono'>Interval: </span><input class='mono' type='range' min='0' max='2000' step='100' value='400' id='interval'></input><span id='show-interval' class='mono'>400</span><br>
+		<span class='mono'>Turbo mode?</span><input class='mono' type='checkbox' id='turbo'/>
+		<br>
+		<br>
+		<textarea id="source" class="mono box full dyn"></textarea>
+		<br>
+		<br>
+	</div>
+	<h2 class="mono">
+		Output
+		<button id="stop" class='mono btn runtime' disabled>Stop</button>&nbsp;
+		<span id='ticks' class='mono'></span>&nbsp;
+		<span id='time' class='mono'></span>
+	</h2>
+	<pre id='output' class='cont mono box'> </pre>
+	<div style='display:none; height:60%' class='mono box full runtime'>
+		<table id="head" class="mono box full"> </table>
+		<table id="debug" class="mono box full"> </table>
+	</div>
+</body>
