@@ -141,7 +141,7 @@ var interp = {
 			special = special.map(i => i.join(','));
 		  for (y in matrix){
 			  line = matrix[y];
-				width = line.map(i => len(i)).reduce((a,b) => (a+b));
+				width = line.map(i => len(i)).reduce((a,b) => (a+b),0);
 				out += "<tr height='" + 90*height/width + "'>";
 				for (x in line){
 				  i = line [x];
@@ -155,7 +155,7 @@ var interp = {
 		}
 		$("#debug").html(gentable(a,b));
 		d = d.map(x=>[x,0]);
-		if (c) $("#head").html(gentable(c,d));
+		if (c) $("#head").html(gentable(c,[d]));
 	}
 }
 function range (a,b){

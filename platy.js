@@ -5,11 +5,13 @@ interp.lang = platy = {
 		platy.pointers = [[0,0]];
 		platy.stack = args;
 		platy.lines = source.split("\n");
-		platy.funcs = platy.lines.map(y => y.split("").map(x => platy.fdict[x]).concat(platy.fdict.end));
+		platy.funcs = platy.lines.map(y => platy.tokens(y));
+		platy.funcs = platy.funcs.map(y => y.map(x => platy.getop(x)));
+		platy.funcs = platy.funcs.map (x => x.concat(platy.fdict.end));
 		platy.funcs [0].splice(-1, 1, platy.fdict.final);
 	},
 	update(){
-		var func = platy.funcs[this.ip[1]][this.ip[0]];
+		var func = platy.funcs[platy.ip[1]][platy.ip[0]];
 		interp.debug(platy.callstack, platy.pointers.map(y => [y[0], y[1]+1]),
 			[platy.stack], range(0,platy.stack.length-1).slice(platy.stack.length-func.len));
 		func();
@@ -70,6 +72,51 @@ interp.lang = platy = {
 	},
 	write(args){
 		platy.stack.push(...args);
+	},
+	getop(s){
+		var out = platy.fdict[s];
+		if (!out) out = (function(x){
+			return Object.assign(function(){
+				platy.write([x]);
+				platy.pointer++;
+			}, {len:0});
+		})(eval(s));
+		return out;
+	},
+	tokens(string){
+		var i,s, out=[], quote, quotes = "\"'`#", escaped;
+		for (i=0; i<string.length;i++){
+			s = string [i];
+			if (quote){
+				if (quote === "#"){
+					if (/[\w!\?]/.test(s)){
+						out[out.length-1] += s;
+					} else {
+						quote = false;
+						i--;
+					}
+				} else {
+					out[out.length-1] += s;
+					if (escaped){
+						escaped = false;
+					} else {
+						if (quote === "'"){
+							out[out.length-1] += "'";
+						}
+						if (s === quote || quote === "'"){
+							quote = false;
+						}
+					}
+				}
+			} else {
+				if (~quotes.indexOf(s)){
+					quote = s;
+				}
+				out.push(s);
+			}
+
+		}
+		return out;
 	}
 };
 platy.setup();
